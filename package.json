@@ -2,15 +2,26 @@
   "name": "project_prioritization_server",
   "version": "1.0.0",
   "description": "CA Final Assessment",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "cross-env NODE_ENV=development node src /index.js",
+    "start-production": "cross-env NODE_ENV=production node src /index.js",
+    "start-dev": "cross-env PORT=55000 NODE_ENV=development nodemon src /index.js"
   },
   "author": "Chen Zhang & Ana Mingyang Wang",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
-    "helmet": "^6.0.0"
+    "helmet": "^6.0.0",
+    "mongoose": "^6.7.0"
+  },
+  "devDependencies": {
+    "jest": "^29.2.2",
+    "nodemon": "^2.0.20",
+    "supertest": "^6.3.1"
   }
 }
