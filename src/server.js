@@ -1,10 +1,21 @@
-const express = require("express");
-const app = express();
-const cors = require("cors");
-const helmet = require("helmet");
+import express from 'express';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import helmet from 'helmet';
+import mainRouter from './routes/mainRouter.js';
 
-const PORT = process.env.PORT || 0;
-const HOST = "0.0.0.0";
+dotenv.config()
+// * middleware
+export const app = express();
+app.use(cors());
+app.use(express.json());
+
+// !monitor path on terminal
+app.use((req, res, next) => {
+  console.log(req.path, req.method);
+  next();
+});
+
 
 // ? Cool trick for when promises or other complex callstack things are crashing & breaking:
 void process.on("unhandledRejection", (reason, p) => {
@@ -27,9 +38,10 @@ app.use(
   })
 );
 
+app.use("/", mainRouter)
 
-module.exports = {
-  app,
-  PORT,
-  HOST,
-};
+app.get('/', (req, res) => {
+  res.json({message: "Welcome to Project!"})
+})
+
+

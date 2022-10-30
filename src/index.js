@@ -1,16 +1,10 @@
-var { app, PORT, HOST } = require("./server");
+import { app } from "./server.js";
 
-const server = app.listen(PORT, HOST, () => {
-  if (server.address().port !== PORT) {
-    PORT = server.address().port;
-  }
+// * set server's address
+const PORT = process.env.PORT || 5000;
 
-  console.log(`
-    ExpressJS Demo server is now running!
-    Server address mapping is:
-    
-    HOST: ${HOST}
-    PORT: ${PORT}
-    Congrats!
-  `);
+const dbConfig = { useNewUrlParser: true, useUnifiedTopology: true };
+
+app.listen(PORT, () => {
+  console.log(`Lisening on port ${process.env.PORT}`);
 });
