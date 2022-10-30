@@ -18,6 +18,7 @@ router.get("/:id", (req, res) => {
 router.delete("/:id", (req, res) => {
   res.json({ message: "Delete Ticket" });
 });
+
 // * update a single ticket
 router.put("/:id", (req, res) => {
   res.json({ message: "Update Ticket" });

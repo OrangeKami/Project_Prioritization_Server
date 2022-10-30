@@ -38,7 +38,7 @@ app.use(
   })
 );
 
-app.use("/", mainRouter)
+app.use(mainRouter)
 
 app.get('/', (req, res) => {
   res.json({message: "Welcome to Project!"})
