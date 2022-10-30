@@ -5,10 +5,12 @@ const router = express.Router();
 router.get("/", (req, res) => {
   res.json({ message: "All Tickets" });
 });
+
 // * create a single ticket
 router.post("/", (req, res) => {
   res.json({ message: "Create Ticket" });
 });
+
 // * get single tickets from
 router.get("/:id", (req, res) => {
   res.json({ message: "Single Ticket" });

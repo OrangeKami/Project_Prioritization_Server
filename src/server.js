@@ -10,7 +10,7 @@ export const app = express();
 app.use(cors());
 app.use(express.json());
 
-// !monitor path on terminal
+// !monitor path at terminal
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
