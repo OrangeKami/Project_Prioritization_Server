@@ -1,21 +1,18 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import helmet from 'helmet';
-import mainRouter from './routes/mainRouter.js';
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import mainRouter from "./routes/mainRouter.js";
 
-dotenv.config()
 // * middleware
 export const app = express();
 app.use(cors());
 app.use(express.json());
 
-// !monitor path at terminal
+// ! monitor path at terminal
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
-
 
 // ? Cool trick for when promises or other complex callstack things are crashing & breaking:
 void process.on("unhandledRejection", (reason, p) => {
@@ -38,10 +35,6 @@ app.use(
   })
 );
 
-app.use(mainRouter)
-
-app.get('/', (req, res) => {
-  res.json({message: "Welcome to Project!"})
-})
+app.use(mainRouter);
 
 
