@@ -4,11 +4,9 @@ import dotenv from "dotenv";
 
 dotenv.config()
 
-// * set server's address
+// * set database config
 const dbConfig = { useNewUrlParser: true, useUnifiedTopology: true };
 
-// const MONG_URI =
-//   "mongodb+srv://Chen:Chen123@cluster0.oqwuc7s.mongodb.net/?retryWrites=true&w=majority";
 
 //  * connect to server MongoDB
 mongoose
@@ -23,9 +21,11 @@ mongoose
     console.log(err);
   });
 
-app.get("/", (req, res) => {
-  res.json({ message: "Welcome to Project!" });
-});
+
+// * not in use when mongodb is ser up
+// app.get("/", (req, res) => {
+//   res.json({ message: "Welcome to Project!" });
+// });
 
 
 

@@ -6,6 +6,11 @@ router.get("/", (req, res) => {
   res.json({ message: "All Tickets" });
 });
 
+// todo get submitted tickets
+router.get("/submitted", (req, res) => {
+  res.json({ message: "all  submitted tickets" });
+});
+
 // * create a single ticket
 router.post("/", (req, res) => {
   res.json({ message: "Create Ticket" });
