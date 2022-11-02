@@ -11,30 +11,15 @@ const ticketSchema = new Schema(
       type: String,
       required: true,
     },
-    impact: {
-      type: String,
-      required: true,
-      default: "?",
-      enum: ["Small", "Medium", "Large", "Xlarge", "?"],
-      // todo my need a default value
-    },
-    confidence: {
-      type: String,
-      required: true,
-      default: "?",
-      enum: ["Small", "Medium", "Large", "Xlarge", "?"],
-      // todo my need a default value
-    },
-    effort: {
-      type: String,
-      required: true,
-      default: "?",
-      enum: ["Small", "Medium", "Large", "Xlarge", "?"],
-    },
 
     isSubmitted: {
       type: Boolean,
       default: false,
+    },
+
+    ice: {
+      type: Schema.Types.ObjectId,
+      ref: "Ice",
     },
     //  todo ticket status  when link to manger side
     // status: {

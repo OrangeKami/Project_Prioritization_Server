@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from "mongoose";
 import Ticket from '../models/ticketModel.js';
+import Ice from '../models/iceModel.js';
 
 //  ! get all tickets 
 export const getAllTickets = async (req, res) => {
@@ -26,7 +27,7 @@ export const getSubmittedTickets = async (req, res) => {
 export const getSingleTicket = async (req, res) => {
     const { id } = req.params;
     try {
-        const ticket = await Ticket.findById(id);
+        const ticket = await Ticket.findById(id).populate('ice')
         res.status(200).json(ticket)
     } catch(err) {
         res.status(404).json({message: err.message})
@@ -36,20 +37,47 @@ export const getSingleTicket = async (req, res) => {
 // ! create new Ticket
 export const createTicket = async (req, res) => {
 
-    const newTicket = new Ticket({
-        initialtive: req.body.initialtive,
-        description: req.body.description,
-        impact: req.body.impact,
-        confidence: req.body.confidence,
-        effort: req.body.effort, 
-        isSubmitted: req.body.isSubmitted,
-    })
-    try {
-         await newTicket.save();
-        res.status(200).json(newTicket);
-    } catch (err) {
-        res.status(500).json({error:err.message});
-    }
+  console.log(req.body);
+  const newIce = new Ice({
+    impact: req.body.impact,
+    effort: req.body.effort,
+    confidence: req.body.confidence
+  });
+
+  try {
+    await newIce.save()   
+  } catch (err) {
+    res.status(404).json({message: err.message})
+  }
+
+  const newTicket = new Ticket({
+    initialtive: req.body.initialtive,
+    description: req.body.description,
+    ice: newIce._id,
+    isSubmitted: req.body.isSubmitted
+  });
+
+  try {
+    await newTicket.save()
+    res.status(200).json(newTicket)
+  } catch (err) {
+    res.status(404).json({message: err.message})
+  }
+
+    // const newTicket = new Ticket({
+    //     initialtive: req.body.initialtive,
+    //     description: req.body.description,
+    //     impact: req.body.impact,
+    //     confidence: req.body.confidence,
+    //     effort: req.body.effort, 
+    //     isSubmitted: req.body.isSubmitted,
+    // })
+    // try {
+    //      await newTicket.save();
+    //     res.status(200).json(newTicket);
+    // } catch (err) {
+    //     res.status(500).json({error:err.message});
+    // }
 }
 
 // ! update Ticket
