@@ -44,12 +44,13 @@ export const createTicket = async (req, res) => {
     confidence: req.body.confidence
   });
 
+  // * create new Ice
   try {
     await newIce.save()   
   } catch (err) {
     res.status(404).json({message: err.message})
   }
-
+  // * after ice save use its _id as ObjectId to ticket get Ice and Ticket Data nested
   const newTicket = new Ticket({
     initialtive: req.body.initialtive,
     description: req.body.description,
@@ -81,21 +82,25 @@ export const createTicket = async (req, res) => {
 }
 
 // ! update Ticket
+// ? need to be efficent (Use 2 find method)
 export const updateTicket = async (req, res) => {
     const {id} = req.params;
-    const {initialtive, description, impact,effort,confidence, isSubmitted} = req.body;
     if (!mongoose.Types.ObjectId.isValid(id))
       return res.status(404).send(`No post with id: ${id}`);
-    const updateTicket = {
-      initialtive,
-      description,
-      impact,
-      effort,
-      confidence,
+      const ticket = await Ticket.findById(id);
+      const updateTicket = {
+      initialtive: req.body.initialtive,
+      description: req.body.description,
+      ice: {
+        impact: req.body.impact,
+        confidence: req.body.confidence,
+        effort: req.body.effort,
+        _id: ticket.ice
+      },
       _id: id
     };
     await Ticket.findByIdAndUpdate(id, updateTicket, {new: true});
-    res.json(updateTicket)
+    res.json(updateTicket);
 }
 
 // ! delet Ticket
