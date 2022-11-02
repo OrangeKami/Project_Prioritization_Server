@@ -6,7 +6,7 @@ import Ice from '../models/iceModel.js';
 //  ! get all tickets 
 export const getAllTickets = async (req, res) => {
     try {
-        const  tickets = await Ticket.find();
+        const  tickets = await Ticket.find().populate('ice');
         res.status(200).json(tickets)
     } catch(err) {
         res.status(404).json({message: err.message})
