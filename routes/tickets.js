@@ -1,34 +1,31 @@
 import express from "express";
 const router = express.Router();
 
-//  * get all tickets
-router.get("/", (req, res) => {
-  res.json({ message: "All Tickets" });
-});
+import {
+  getAllTickets,
+  getSubmittedTickets,
+  createTicket,
+  getSingleTicket,
+  updateTicket,
+  deleteTicket,
+} from "../controllers/ticketController.js";
+
+// ? need to change to get all submited ticket later
+router.get("/", getAllTickets);
 
 // todo get submitted tickets
-router.get("/submitted", (req, res) => {
-  res.json({ message: "all  submitted tickets" });
-});
+router.get("/submitted", getSubmittedTickets);
 
 // * create a single ticket
-router.post("/", (req, res) => {
-  res.json({ message: "Create Ticket" });
-});
+router.post("/new", createTicket);
 
 // * get single tickets from
-router.get("/:id", (req, res) => {
-  res.json({ message: "Single Ticket" });
-});
+router.get("/:id", getSingleTicket);
 
 //  * delete a single ticket
-router.delete("/:id", (req, res) => {
-  res.json({ message: "Delete Ticket" });
-});
+router.delete("/:id", deleteTicket);
 
 // * update a single ticket
-router.put("/:id", (req, res) => {
-  res.json({ message: "Update Ticket" });
-});
+router.put("/:id", updateTicket);
 
 export default router;

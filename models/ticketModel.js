@@ -1,33 +1,37 @@
-import mongoose from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-const ticketSchema = new mongoose.Schema(
+const ticketSchema = new Schema(
   {
     initialtive: {
       type: String,
       required: true,
     },
-    target: {
-      type: Schema.Types.ObjectId,
-      ref: "Target",
-    },
-    //  todo future support
-    // author: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "User",
-    // },
+
     description: {
       type: String,
       required: true,
     },
-    ice: {
-      type: Schema.Types.ObjectId,
-      ref: 'Ice',
+    impact: {
+      type: String,
+      required: true,
+      default: "?",
+      enum: ["Small", "Medium", "Large", "Xlarge", "?"],
+      // todo my need a default value
     },
-    // todo future function Comment
-    // comment: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "Comment",
-    // },
+    confidence: {
+      type: String,
+      required: true,
+      default: "?",
+      enum: ["Small", "Medium", "Large", "Xlarge", "?"],
+      // todo my need a default value
+    },
+    effort: {
+      type: String,
+      required: true,
+      default: "?",
+      enum: ["Small", "Medium", "Large", "Xlarge", "?"],
+    },
+
     isSubmitted: {
       type: Boolean,
       default: false,
@@ -37,10 +41,23 @@ const ticketSchema = new mongoose.Schema(
     //   type: Schema.Types.ObjectId,
     //   ref: "Status"
     // }
+    //  todo future support
+    // target: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "Target",
+    // },
+    //  todo future support
+    // author: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    // },
+    // todo future function Comment
+    // comment: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "Comment",
+    // },
   },
   { timestamps: true }
 );
-
-
 
 export default mongoose.model("Ticket", ticketSchema);

@@ -1,12 +1,14 @@
 import express from "express";
 import cors from "cors";
 import helmet from "helmet";
+import bodyParser from "body-parser";
 import mainRouter from "./routes/mainRouter.js";
 
 // * middleware
 export const app = express();
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json({ limit: "30mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 
 // ! monitor path at terminal
 app.use((req, res, next) => {
