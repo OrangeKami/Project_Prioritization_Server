@@ -1,25 +1,26 @@
 import express from "express";
 const router = express.Router();
 import { validate } from "../middleware/userMiddleware.js";
-import { signUpUser } from "../controllers/userController.js"
+import { signUpUser, signInUser, updateUser, getUser, getAllUsers,deleteUser } from "../controllers/userController.js"
 
-//  * get all users 
-router.get("/", (req, res) => {
-  res.json({ message: "All Users" });
-});
+//  * get user
+router.get("/:id", getUser);
 
 // * user sign up
-router.post("/sign-up", validate('createUser'), signUpUser);
+router.post("/sign-up", validate('signUp'), signUpUser);
 
 
 // * user login
-router.post("/sign-in", (req, res) => {
-    res.json({ message: "User login"})
-})
+router.post("/sign-in", validate('signIn'), signInUser);
 
 // * user update
-router.put("/:id", (req, res) => {
-    res.json({ message: "User update"})
-})
+router.put("/:id", validate("updateInfo"), updateUser);
 
+//  * get all users
+// ? for test only
+router.get("/", getAllUsers);
+
+// * delete user
+// ? test only
+router.delete("/:id", deleteUser);
 export default router;

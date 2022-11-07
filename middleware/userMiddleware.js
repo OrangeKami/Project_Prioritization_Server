@@ -1,11 +1,12 @@
-import { check, body} from "express-validator";
+import { check } from "express-validator";
 
 export const validate = (method) => {
   switch (method) {
-    case "createUser": {
+    case "signUp": {
       return [
         check(["firstName", "lastName", "email", "password"])
-          .not().isEmpty()
+          .not()
+          .isEmpty()
           .withMessage("All fields are required"),
 
         check("email")
@@ -32,6 +33,29 @@ export const validate = (method) => {
           }
           return true;
         }),
+      ];
+    }
+
+    case "signIn": {
+      return [
+        check(["email", "password"])
+          .not()
+          .isEmpty()
+          .withMessage("All fields are required"),
+      ];
+    }
+
+    case "updateInfo": {
+      return [
+        check(["firstName", "lastName", "email"])
+          .not()
+          .isEmpty()
+          .withMessage("All fields are required"),
+
+        check("email")
+          .isEmail()
+          .withMessage("invalid email address")
+          .normalizeEmail(),
       ];
     }
   }

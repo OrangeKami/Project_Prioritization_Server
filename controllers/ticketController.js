@@ -1,4 +1,3 @@
-import express from "express";
 import mongoose from "mongoose";
 import Ticket from "../models/ticketModel.js";
 import Ice from "../models/iceModel.js";
@@ -86,7 +85,7 @@ export const createTicket = async (req, res) => {
 export const updateTicket = async (req, res) => {
   const { id } = req.params;
   if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send(`No post with id: ${id}`);
+    return res.status(404).send(`No ticket with id: ${id}`);
   const ticket = await Ticket.findById(id);
   const updateTicket = {
     initialtive: req.body.initialtive,
