@@ -3,6 +3,7 @@ import cors from "cors";
 import helmet from "helmet";
 import bodyParser from "body-parser";
 import mainRouter from "./routes/mainRouter.js";
+import expressValidator from "express-validator";
 
 // * middleware
 export const app = express();

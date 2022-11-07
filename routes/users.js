@@ -1,5 +1,7 @@
 import express from "express";
 const router = express.Router();
+import { validate } from "../middleware/userMiddleware.js";
+import { signUpUser } from "../controllers/userController.js"
 
 //  * get all users 
 router.get("/", (req, res) => {
@@ -7,9 +9,8 @@ router.get("/", (req, res) => {
 });
 
 // * user sign up
-router.post("/sign-up", (req, res) => {
-    res.json({ message: "User register"})
-});
+router.post("/sign-up", validate('createUser'), signUpUser);
+
 
 // * user login
 router.post("/sign-in", (req, res) => {

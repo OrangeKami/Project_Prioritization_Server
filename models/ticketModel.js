@@ -16,16 +16,10 @@ const ticketSchema = new Schema(
       type: Boolean,
       default: false,
     },
-
     ice: {
       type: Schema.Types.ObjectId,
       ref: "Ice",
     },
-    //  todo ticket status  when link to manger side
-    // status: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "Status"
-    // }
     //  todo future support
     // target: {
     //   type: Schema.Types.ObjectId,

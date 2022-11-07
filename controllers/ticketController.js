@@ -46,6 +46,7 @@ export const createTicket = async (req, res) => {
   // * create new Ice
   try {
     await newIce.save();
+    res.status(200).json(newIce);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
