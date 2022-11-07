@@ -7,7 +7,7 @@ export const validate = (method) => {
         check(["firstName", "lastName", "email", "password"])
           .not()
           .isEmpty()
-          .withMessage("All fields are required"),
+          .withMessage("Fields can't be blank"),
 
         check("email")
           .isEmail()
@@ -41,7 +41,7 @@ export const validate = (method) => {
         check(["email", "password"])
           .not()
           .isEmpty()
-          .withMessage("All fields are required"),
+          .withMessage("Fields can't be blank"),
       ];
     }
 
@@ -50,7 +50,7 @@ export const validate = (method) => {
         check(["firstName", "lastName", "email"])
           .not()
           .isEmpty()
-          .withMessage("All fields are required"),
+          .withMessage("Fields can't be blank"),
 
         check("email")
           .isEmail()
