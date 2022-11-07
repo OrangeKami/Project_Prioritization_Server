@@ -1,6 +1,7 @@
 import User from "../models/userModel.js";
 import { validationResult } from "express-validator";
 import mongoose from "mongoose";
+import bcrypt from "bcrypt";
 
 export const signUpUser = async (req, res) => {
   try {
@@ -11,10 +12,22 @@ export const signUpUser = async (req, res) => {
       res.status(422).json({ errors: errors.array() });
     }
     const { firstName, lastName, email, password } = req.body;
+    // *check is email exists
+    const exists = await User.findOne({ email });
+    if (exists) {
+      throw Error("Email already in use");
+    }
 
-    const user = await User.signup(firstName, lastName, email, password);
+    const hashPassword = await bcrypt.hash(password, 10);
 
-    res.status(200).json(user);
+    const newUser = new User({
+      lastName: req.body.lastName,
+      firstName: req.body.firstName,
+      email: req.body.email,
+      password: hashPassword,
+    });
+
+    res.status(200).json(newUser);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -28,7 +41,16 @@ export const signInUser = async (req, res) => {
       res.status(422).json({ errors: errors.array() });
     }
     const { email, password } = req.body;
-    const user = await User.signin(email, password);
+
+    const user = await User.findOne({ email });
+    if (!user) {
+      throw Error("Incorrect email");
+    }
+
+    const match = await bcrypt.compare(password, user.password);
+    if (!match) {
+      throw Error("Invalid password");
+    }
 
     res.status(200).json(user);
   } catch (err) {
@@ -49,10 +71,13 @@ export const updateUser = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id))
       return res.status(404).send(`No user with id: ${id}`);
 
+    const hashPassword = await bcrypt.hash(req.body.password, 10);
+
     const updateUser = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
       email: req.body.email,
+      password: hashPassword
     };
     await User.findByIdAndUpdate(id, updateUser, { new: true });
     res.json(updateUser);
