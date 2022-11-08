@@ -24,34 +24,25 @@ const ticketSchema = new Schema(
       required: true,
     },
 
-    impact: {
-      type: String,
-      required: true,
-      default: "?",
-      enum: ["Small", "Medium", "Large", "Xlarge", "?"],
-    },
-    confidence: {
-      type: String,
-      required: true,
-      default: "?",
-      enum: ["Small", "Medium", "Large", "Xlarge", "?"],
-    },
-    effort: {
-      type: String,
-      required: true,
-      default: "?",
-      enum: ["Small", "Medium", "Large", "Xlarge", "?"],
-    },
-
     dueDate: {
       type: Date,
     },
 
+    ice:{ 
+      type: Schema.Types.ObjectId,
+      ref: "Ice",
+      required: true
+    },
+    // author: {
+    //   type: Schema.Types.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
     isSubmitted: {
       type: Boolean,
       default: false,
     },
-    
+
     //  todo future support
     // target: {
     //   type: Schema.Types.ObjectId,

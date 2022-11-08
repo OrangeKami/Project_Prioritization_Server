@@ -74,7 +74,7 @@ export const validate = (method) => {
           .isLength({min:5, max: 30 })
           .withMessage("Title length is between 5-30"),
 
-        check("target").isLength({min:3, max: 20}).withMessage("Target length is between 3-20")
+        check("target").isLength({max: 20}).withMessage("Target length is between 3-20")
       ];
     }
   }
