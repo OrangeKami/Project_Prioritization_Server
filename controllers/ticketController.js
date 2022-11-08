@@ -4,7 +4,7 @@ import Ice from "../models/iceModel.js";
 //  ! get all tickets
 export const getAllTickets = async (req, res) => {
   try {
-    const tickets = await Ticket.find().populate("ice");
+    const tickets = await Ticket.find();
     res.status(200).json(tickets);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -25,7 +25,7 @@ export const getSubmittedTickets = async (req, res) => {
 export const getSingleTicket = async (req, res) => {
   const { id } = req.params;
   try {
-    const ticket = await Ticket.findById(id).populate("ice");
+    const ticket = await Ticket.findById(id);
     res.status(200).json(ticket);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -34,22 +34,8 @@ export const getSingleTicket = async (req, res) => {
 
 // ! create new Ticket
 export const createTicket = async (req, res) => {
-  //  *create new ice
   try {
-    // * new ice create
-    const newIce = await Ice.create({
-      impact: req.body.impact,
-      effort: req.body.effort,
-      confidence: req.body.confidence,
-    });
-
-    // * after ice save use its _id as ObjectId to ticket get Ice and Ticket Data nested
-    const newTicket = await Ticket.create({
-      initialtive: req.body.initialtive,
-      description: req.body.description,
-      ice: newIce._id,
-      isSubmitted: req.body.isSubmitted,
-    });
+    const newTicket = await Ticket.create(req.body);
 
     res.status(200).json(newTicket);
   } catch (err) {
@@ -78,19 +64,9 @@ export const createTicket = async (req, res) => {
 export const updateTicket = async (req, res) => {
   const { id } = req.params;
   const ticket = await Ticket.findById(id);
-  const updateTicket = {
-    initialtive: req.body.initialtive,
-    description: req.body.description,
-    ice: {
-      impact: req.body.impact,
-      confidence: req.body.confidence,
-      effort: req.body.effort,
-      _id: ticket.ice,
-    },
-    _id: id,
-  };
-  await Ticket.findByIdAndUpdate(id, updateTicket, { new: true });
-  res.json(updateTicket);
+  
+  await Ticket.findByIdAndUpdate(id, req.body, { new: true });
+  res.json(req.body);
 };
 
 // ! delet Ticket
