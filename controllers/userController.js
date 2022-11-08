@@ -1,5 +1,13 @@
 import User from "../models/userModel.js";
 import { validationResult } from "express-validator";
+import jwt from "jsonwebtoken";
+
+// * creating jwt token
+const createToken = (_id) => {
+  return jwt.sign({ _id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE,
+  });
+};
 
 // * sign up users
 export const signUpUser = async (req, res) => {
@@ -19,7 +27,9 @@ export const signUpUser = async (req, res) => {
 
     const newUser = await User.create(req.body);
 
-    res.status(200).json(newUser);
+    const token = createToken(newUser._id);
+
+    res.status(200).json({ newUser, token });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -44,7 +54,8 @@ export const signInUser = async (req, res) => {
     if (!match) {
       throw Error("Invalid password");
     }
-
+    // *create a token
+    const token = createToken(user._id);
     res.status(200).json(user);
   } catch (err) {
     res.status(400).json({ error: err.message });
