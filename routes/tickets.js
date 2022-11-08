@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import { validate } from "../middleware/validateMiddleware.js";
 
 import {
   getAllTickets,
@@ -17,7 +18,7 @@ router.get("/", getAllTickets);
 router.get("/submitted", getSubmittedTickets);
 
 // * create a single ticket
-router.post("/new", createTicket);
+router.post("/new",validate("ticketVali"), createTicket);
 
 // * get single tickets from
 router.get("/:id", getSingleTicket);
@@ -26,6 +27,6 @@ router.get("/:id", getSingleTicket);
 router.delete("/:id", deleteTicket);
 
 // * update a single ticket
-router.put("/:id", updateTicket);
+router.put("/:id",validate("ticketVali"), updateTicket);
 
 export default router;

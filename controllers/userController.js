@@ -1,31 +1,23 @@
 import User from "../models/userModel.js";
 import { validationResult } from "express-validator";
-import mongoose from "mongoose";
-import bcrypt from "bcrypt";
 
+// * sign up users
 export const signUpUser = async (req, res) => {
   try {
     // Finds the validaiton errores in this requests
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
       res.status(422).json({ errors: errors.array() });
     }
-    const { firstName, lastName, email, password } = req.body;
-    // *check is email exists
+
+    // *check is email exist
+    const { email } = req.body;
     const exists = await User.findOne({ email });
     if (exists) {
       throw Error("Email already in use");
     }
 
-    const hashPassword = await bcrypt.hash(password, 10);
-
-    const newUser = new User({
-      lastName: req.body.lastName,
-      firstName: req.body.firstName,
-      email: req.body.email,
-      password: hashPassword,
-    });
+    const newUser = await User.create(req.body);
 
     res.status(200).json(newUser);
   } catch (err) {
@@ -33,10 +25,11 @@ export const signUpUser = async (req, res) => {
   }
 };
 
+// * sign in users
 export const signInUser = async (req, res) => {
   try {
+    // Finds the validaiton errores in this requests
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
       res.status(422).json({ errors: errors.array() });
     }
@@ -47,7 +40,7 @@ export const signInUser = async (req, res) => {
       throw Error("Incorrect email");
     }
 
-    const match = await bcrypt.compare(password, user.password);
+    const match = await user.comparePassword(password);
     if (!match) {
       throw Error("Invalid password");
     }
@@ -58,34 +51,25 @@ export const signInUser = async (req, res) => {
   }
 };
 
+//  * update users
 export const updateUser = async (req, res) => {
   try {
     // Finds the validaiton errores in this requests
     const errors = validationResult(req);
-
     if (!errors.isEmpty()) {
       res.status(422).json({ errors: errors.array() });
     }
 
     const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id))
-      return res.status(404).send(`No user with id: ${id}`);
 
-    const hashPassword = await bcrypt.hash(req.body.password, 10);
-
-    const updateUser = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      password: hashPassword
-    };
-    await User.findByIdAndUpdate(id, updateUser, { new: true });
-    res.json(updateUser);
+    await User.findByIdAndUpdate(id, req.body, { new: true });
+    res.json(req.body);
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
+// *get user details
 export const getUser = async (req, res) => {
   const { id } = req.params;
   try {
@@ -96,6 +80,7 @@ export const getUser = async (req, res) => {
   }
 };
 
+// *get all users info
 export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -108,8 +93,7 @@ export const getAllUsers = async (req, res) => {
 // ! delete user
 export const deleteUser = async (req, res) => {
   const { id } = req.params;
-  if (!mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send(`No user with id: ${id}`);
+
   await User.findByIdAndRemove(id);
   res.json({ message: "User deleted successfully" });
 };

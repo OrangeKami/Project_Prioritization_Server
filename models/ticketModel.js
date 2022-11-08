@@ -2,6 +2,13 @@ import mongoose, { Schema } from "mongoose";
 
 const ticketSchema = new Schema(
   {
+    ticket_id: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true,
+    },
+
     initialtive: {
       type: String,
       required: true,
@@ -10,6 +17,15 @@ const ticketSchema = new Schema(
     description: {
       type: String,
       required: true,
+    },
+
+    target: {
+      type: String,
+      required: true,
+    },
+
+    dueDate: { 
+      type: Date,
     },
 
     isSubmitted: {
