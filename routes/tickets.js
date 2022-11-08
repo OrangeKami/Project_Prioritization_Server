@@ -3,7 +3,7 @@ const router = express.Router();
 import { validate } from "../middleware/validateMiddleware.js";
 
 import {
-  getAllTickets,
+  getAllMyTickets,
   getSubmittedTickets,
   createTicket,
   getSingleTicket,
@@ -12,7 +12,7 @@ import {
 } from "../controllers/ticketController.js";
 
 // ? need to change to get all submited ticket later
-router.get("/", getAllTickets);
+router.get("/myTickets", getAllMyTickets);
 
 // todo get submitted tickets
 router.get("/submitted", getSubmittedTickets);

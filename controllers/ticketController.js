@@ -1,10 +1,10 @@
 import Ticket from "../models/ticketModel.js";
-import Ice from "../models/iceModel.js";
 
 //  ! get all tickets
-export const getAllTickets = async (req, res) => {
+export const getAllMyTickets = async (req, res) => {
   try {
-    const tickets = await Ticket.find();
+    const {author} = req.body;
+    const tickets = await Ticket.find({author});
     res.status(200).json(tickets);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -35,6 +35,7 @@ export const getSingleTicket = async (req, res) => {
 // ! create new Ticket
 export const createTicket = async (req, res) => {
   try {
+    console.log(req)
     const newTicket = await Ticket.create(req.body);
 
     res.status(200).json(newTicket);
@@ -59,7 +60,6 @@ export const createTicket = async (req, res) => {
 };
 
 // ! update Ticket
-// ? need to be efficent (Use 2 find method)
 
 export const updateTicket = async (req, res) => {
   const { id } = req.params;
@@ -69,7 +69,7 @@ export const updateTicket = async (req, res) => {
   res.json(req.body);
 };
 
-// ! delet Ticket
+// ! delete Ticket
 export const deleteTicket = async (req, res) => {
   const { id } = req.params;
   await Ticket.findByIdAndRemove(id);

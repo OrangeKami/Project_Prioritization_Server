@@ -2,8 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import bodyParser from "body-parser";
-import mainRouter from "./routes/mainRouter.js";
-import expressValidator from "express-validator";
+import api from "./routes/api.js";
 
 // * middleware
 export const app = express();
@@ -39,6 +38,4 @@ app.use(
 );
 
 // * register the mainRouter
-app.use(mainRouter);
-
-
+app.use("/api", api);

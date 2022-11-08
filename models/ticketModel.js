@@ -51,22 +51,17 @@ const ticketSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    
     //  todo future support
-    // target: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "Target",
-    // },
-    //  todo future support
-    // author: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "User",
-    // },
+    author: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
+    },
     // todo future function Comment
-    // comment: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: "Comment",
-    // },
+    feedbacks: {
+      type: Schema.Types.ObjectId,
+      ref: "Feedback",
+    },
   },
   { timestamps: true }
 );
