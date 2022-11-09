@@ -1,5 +1,6 @@
 import User from "../models/userModel.js";
 import { validationResult } from "express-validator";
+import mongoose from "mongoose";
 
 //  * update users
 export const updateUser = async (req, res) => {
@@ -11,6 +12,10 @@ export const updateUser = async (req, res) => {
     }
 
     const { id } = req.params;
+    // * check params id is valid mongoose objective id
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: "No such User" });
+    }
 
     await User.findByIdAndUpdate(id, req.body, { new: true });
     res.json(req.body);
@@ -22,6 +27,10 @@ export const updateUser = async (req, res) => {
 // *get user details
 export const getUser = async (req, res) => {
   const { id } = req.params;
+  // * check params id is valid mongoose objective id
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such User" });
+  }
   try {
     const user = await User.findById(id);
     res.status(200).json(user);
@@ -43,7 +52,10 @@ export const getAllUsers = async (req, res) => {
 // ! delete user
 export const deleteUser = async (req, res) => {
   const { id } = req.params;
-
+  // * check params id is valid mongoose objective id
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such User" });
+  }
   await User.findByIdAndRemove(id);
   res.json({ message: "User deleted successfully" });
 };

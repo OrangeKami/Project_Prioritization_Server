@@ -1,6 +1,8 @@
 import Ticket from "../models/ticketModel.js";
+import mongoose from "mongoose";
 
-//  ! get all tickets
+
+//  ! get all my tickets with submitted and no sumitted
 export const getAllMyTickets = async (req, res) => {
   try {
     // * find user id after isAuth middleware
@@ -28,6 +30,11 @@ export const getSubmittedTickets = async (req, res) => {
 // ! get single ticket
 export const getSingleTicket = async (req, res) => {
   const { id } = req.params;
+  // * check params id is valid mongoose objective id
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Ticket" });
+  }
+
   try {
     const ticket = await Ticket.findById(id).populate("author");
     res.status(200).json(ticket);
@@ -54,6 +61,10 @@ export const createTicket = async (req, res) => {
 
 export const updateTicket = async (req, res) => {
   const { id } = req.params;
+  // * check params id is valid mongoose objective id
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Ticket" });
+  }
   await Ticket.findByIdAndUpdate(id, req.body, { new: true });
   res.json(req.body);
 };
@@ -61,6 +72,10 @@ export const updateTicket = async (req, res) => {
 // ! delete Ticket
 export const deleteTicket = async (req, res) => {
   const { id } = req.params;
+  // * check params id is valid mongoose objective id
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Ticket" });
+  }
   await Ticket.findByIdAndRemove(id);
   res.json({ message: "Ticket deleted successfully" });
 };

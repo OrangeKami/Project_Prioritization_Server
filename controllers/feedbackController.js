@@ -1,13 +1,21 @@
 import Feedback from "../models/feedbackModel.js";
+import mongoose from "mongoose";
 
 // * get all feedbacks under ticketId
 export const getAllFeedbacks = async (req, res) => {
+  const { ticketid } = req.params;
+
+  // * check params id is valid mongoose objective id
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Ticket" });
+  }
+
   try {
     const findFeedback = await Feedback.find({
-      ticketId: req.params.ticketid,
+      ticketId: ticketid,
     })
       .populate("ticketId")
-      .populate("feedbackBy"); // * get ticket id from params
+      .populate("feedbackBy");
     res.status(200).json({ findFeedback });
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -16,13 +24,20 @@ export const getAllFeedbacks = async (req, res) => {
 
 // * create a new Feedback
 export const postFeedback = async (req, res) => {
+  const { ticketid } = req.params;
+
+  // * check params id is valid mongoose objective id
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Ticket" });
+  }
+
   try {
     // * for test
     // console.log(req.user)
     // console.log(req.params)
     const feedback = req.body;
     // * add ticketId to feedback
-    feedback.ticketId = req.params.ticketid;
+    feedback.ticketId = ticketid;
     // * add userId to feedback
     feedback.feedbackBy = req.user.id;
 
@@ -35,15 +50,27 @@ export const postFeedback = async (req, res) => {
 
 // * update a feedback
 export const updateFeedback = async (req, res) => {
-  await Feedback.findByIdAndUpdate(req.params.feedbackid, req.body, {
+  const { feedbackid } = req.params;
+
+  // * check params id is valid mongoose objective id
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Feedback" });
+  }
+
+  await Feedback.findByIdAndUpdate(feedbackid, req.body, {
     new: true,
   });
   res.json(req.body);
 };
 
-
 // * delete a feedback
 export const deleteFeedback = async (req, res) => {
-    await Feedback.findByIdAndRemove(req.params.feedbackid)
-    res.json({message: "Feedback delet successfully"})
-}
+  const { feedbackid } = req.params;
+
+  // * check params id is valid mongoose objective id
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such Feedback" });
+  }
+  await Feedback.findByIdAndRemove(feedbackid);
+  res.json({ message: "Feedback deleted successfully" });
+};

@@ -12,10 +12,10 @@ import {
 router
   .route("/:ticketid/feedbacks")
   .get(getAllFeedbacks)
-  .post(checkRole,postFeedback);
+  .post(checkRole,postFeedback); //! check role
 
 router
-  .route("/:ticketid/feedbacks/:feedbackid", checkRole)
+  .route("/:ticketid/feedbacks/:feedbackid", checkRole) // ! check role is == "manager"
   .patch(updateFeedback)
   .delete(deleteFeedback);
 
