@@ -17,7 +17,3 @@ mongoose
     console.log(err);
   });
 
-// * not in use when mongodb is ser up
-// app.get("/", (req, res) => {
-//   res.json({ message: "Welcome to Project!" });
-// });

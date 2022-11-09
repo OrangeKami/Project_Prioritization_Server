@@ -3,9 +3,12 @@
   "version": "1.0.0",
   "description": "CA Final Assessment",
   "type": "module",
+  "jest": {
+    "transform": {}
+  },
   "main": "src/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
     "start": "cross-env NODE_ENV=development node src /index.js",
     "production": "cross-env NODE_ENV=production node src /index.js",
     "dev": "cross-env PORT=55000 NODE_ENV=development nodemon src /index.js"

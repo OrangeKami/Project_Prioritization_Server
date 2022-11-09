@@ -11,6 +11,12 @@ router
 
   .use("/tickets", isAuth, ticketsRouter, feedbacksRouter)
 
-  .use("/users", isAuth, usersRouter);
+  .use("/users", isAuth, usersRouter)
+
+// * not in use when mongodb is ser up
+// ! test only
+.get("/", (req, res) => {
+  res.status(200).json({ message: "Welcome to Project!" });
+});
 
 export default router;
