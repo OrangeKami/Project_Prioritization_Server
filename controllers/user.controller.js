@@ -8,7 +8,7 @@ export const updateUser = async (req, res) => {
     // Finds the validaiton errores in this requests
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(422).json({ errors: errors.array() });
+      return res.status(422).json({ errors: errors.array() });
     }
 
     const { id } = req.params;

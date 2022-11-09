@@ -15,7 +15,7 @@ export const signUp = async (req, res) => {
     // Finds the validaiton errores in this requests
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(422).json({ errors: errors.array() });
+      return res.status(422).json({ errors: errors.array() });
     }
 
     // *check is email exist
@@ -41,8 +41,9 @@ export const signIn = async (req, res) => {
     // Finds the validaiton errores in this requests
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      res.status(422).json({ errors: errors.array() });
+     return  res.status(422).json({ errors: errors.array() });
     }
+    
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
