@@ -1,12 +1,12 @@
 import express from "express";
 const router = express.Router();
-import { validate } from "../middleware/validateMiddleware.js";
+import { validate } from "../middleware/validate.middleware.js";
 import {
   updateUser,
   getUser,
   getAllUsers,
   deleteUser,
-} from "../controllers/userController.js";
+} from "../controllers/user.controller.js";
 
 //  * get user
 router

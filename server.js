@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import bodyParser from "body-parser";
-import api from "./routes/api.js";
+import api from "./routes/api.route.js";
 import dotenv from "dotenv";
 
 // * middleware

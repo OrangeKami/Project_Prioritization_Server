@@ -1,6 +1,5 @@
-import Ticket from "../models/ticketModel.js";
+import Ticket from "../models/ticket.model.js";
 import mongoose from "mongoose";
-
 
 //  ! get all my tickets with submitted and no sumitted
 export const getAllMyTickets = async (req, res) => {

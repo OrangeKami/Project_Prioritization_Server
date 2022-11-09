@@ -1,4 +1,4 @@
-import User from "../models/userModel.js";
+import User from "../models/user.model.js";
 import { validationResult } from "express-validator";
 import mongoose from "mongoose";
 

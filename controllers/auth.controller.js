@@ -1,10 +1,10 @@
-import User from "../models/userModel.js";
+import User from "../models/user.model.js";
 import { validationResult } from "express-validator";
 import jwt from "jsonwebtoken";
 
 // * creating jwt token
 const createToken = (_id) => {
-  return jwt.sign({_id}, process.env.JWT_SECRET, {
+  return jwt.sign({ _id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE,
   });
 };
@@ -35,7 +35,6 @@ export const signUp = async (req, res) => {
   }
 };
 
-
 // * sign in users. find valid email, check the password then create a new token
 export const signIn = async (req, res) => {
   try {
@@ -58,12 +57,10 @@ export const signIn = async (req, res) => {
     // *create a token
     const token = createToken(user._id);
 
-    res.status(200).json({user, token});
+    res.status(200).json({ user, token });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
 };
 
-
 //  * reset password, check token to validity before prcessing
-

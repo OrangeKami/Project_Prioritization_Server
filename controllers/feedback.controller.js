@@ -1,4 +1,4 @@
-import Feedback from "../models/feedbackModel.js";
+import Feedback from "../models/feedback.model.js";
 import mongoose from "mongoose";
 
 // * get all feedbacks under ticketId

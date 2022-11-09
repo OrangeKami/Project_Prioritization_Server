@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import { validate } from "../middleware/validateMiddleware.js";
+import { validate } from "../middleware/validate.middleware.js";
 
 import {
   getAllMyTickets,
@@ -9,7 +9,7 @@ import {
   getSingleTicket,
   updateTicket,
   deleteTicket,
-} from "../controllers/ticketController.js";
+} from "../controllers/ticket.controller.js";
 
 router
   .get("/myTickets", getAllMyTickets) // ? need to change to get all submited ticket later

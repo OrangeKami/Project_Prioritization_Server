@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import User from "../models/userModel.js";
+import User from "../models/user.model.js";
 
 export const isAuth = async (req, res, next) => {
   const authHeader = req.get("Authorization");
@@ -18,6 +18,3 @@ export const isAuth = async (req, res, next) => {
     res.status(401).json({ error: "Request is not authorized" });
   }
 };
-
-
-
