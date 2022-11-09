@@ -54,8 +54,6 @@ export const createTicket = async (req, res) => {
 
 export const updateTicket = async (req, res) => {
   const { id } = req.params;
-  const ticket = await Ticket.findById(id);
-
   await Ticket.findByIdAndUpdate(id, req.body, { new: true });
   res.json(req.body);
 };
