@@ -39,7 +39,8 @@ export const getSingleTicket = async (req, res) => {
 // ! create new Ticket
 export const createTicket = async (req, res) => {
   try {
-    console.log(req.user._id);
+    // * for test only
+    // console.log(req.user._id);
     const ticket = req.body;
     ticket.author = req.user._id;
     const newTicket = await Ticket.create(ticket);

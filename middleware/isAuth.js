@@ -12,7 +12,7 @@ export const isAuth = async (req, res, next) => {
   try {
     const { _id } = jwt.verify(token, process.env.JWT_SECRET);
     // ! find user with the _id from the User database
-    req.user = await User.findOne({ _id }).select("_id");
+    req.user = await User.findOne({ _id });
     next();
   } catch (err) {
     res.status(401).json({ error: "Request is not authorized" });
