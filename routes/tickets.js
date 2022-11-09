@@ -11,22 +11,18 @@ import {
   deleteTicket,
 } from "../controllers/ticketController.js";
 
-// ? need to change to get all submited ticket later
-router.get("/myTickets", getAllMyTickets);
+router
+  .get("/myTickets", getAllMyTickets) // ? need to change to get all submited ticket later
 
-// todo get submitted tickets
-router.get("/submitted", getSubmittedTickets);
+  .get("/submitted", getSubmittedTickets) // * get submitted tickets
 
-// * create a single ticket
-router.post("/new",validate("ticketVali"), createTicket);
+  .post("/new", validate("ticketVali"), createTicket) // * create a single ticket
 
-// * get single tickets from
-router.get("/:id", getSingleTicket);
+  .get("/:id", getSingleTicket) // * get single tickets from
 
-//  * delete a single ticket
-router.delete("/:id", deleteTicket);
+  .delete("/:id", deleteTicket) //  * delete a single ticket
 
-// * update a single ticket
-router.put("/:id",validate("ticketVali"), updateTicket);
+  .put("/:id", validate("ticketVali"), updateTicket); // * update a single ticket
 
+  
 export default router;

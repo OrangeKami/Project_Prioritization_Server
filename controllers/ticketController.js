@@ -3,8 +3,10 @@ import Ticket from "../models/ticketModel.js";
 //  ! get all tickets
 export const getAllMyTickets = async (req, res) => {
   try {
-    const {author} = req.body;
-    const tickets = await Ticket.find({author});
+    // * find user id after isAuth middleware
+    const tickets = await Ticket.find({ author: req.user.id }).populate(
+      "author"
+    );
     res.status(200).json(tickets);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -14,7 +16,9 @@ export const getAllMyTickets = async (req, res) => {
 // ! get all submitted tickets
 export const getSubmittedTickets = async (req, res) => {
   try {
-    const submittedTickets = await Ticket.find({ isSubmitted: true });
+    const submittedTickets = await Ticket.find({ isSubmitted: true }).populate(
+      "author"
+    );
     res.status(200).json(submittedTickets);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -25,7 +29,7 @@ export const getSubmittedTickets = async (req, res) => {
 export const getSingleTicket = async (req, res) => {
   const { id } = req.params;
   try {
-    const ticket = await Ticket.findById(id);
+    const ticket = await Ticket.findById(id).populate("author");
     res.status(200).json(ticket);
   } catch (err) {
     res.status(404).json({ message: err.message });
@@ -35,28 +39,14 @@ export const getSingleTicket = async (req, res) => {
 // ! create new Ticket
 export const createTicket = async (req, res) => {
   try {
-    console.log(req)
-    const newTicket = await Ticket.create(req.body);
-
+    console.log(req.user._id);
+    const ticket = req.body;
+    ticket.author = req.user._id;
+    const newTicket = await Ticket.create(ticket);
     res.status(200).json(newTicket);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
-
-  // const newTicket = new Ticket({
-  //     initialtive: req.body.initialtive,
-  //     description: req.body.description,
-  //     impact: req.body.impact,
-  //     confidence: req.body.confidence,
-  //     effort: req.body.effort,
-  //     isSubmitted: req.body.isSubmitted,
-  // })
-  // try {
-  //      await newTicket.save();
-  //     res.status(200).json(newTicket);
-  // } catch (err) {
-  //     res.status(500).json({error:err.message});
-  // }
 };
 
 // ! update Ticket
@@ -64,7 +54,7 @@ export const createTicket = async (req, res) => {
 export const updateTicket = async (req, res) => {
   const { id } = req.params;
   const ticket = await Ticket.findById(id);
-  
+
   await Ticket.findByIdAndUpdate(id, req.body, { new: true });
   res.json(req.body);
 };

@@ -51,13 +51,11 @@ const ticketSchema = new Schema(
       type: Boolean,
       default: false,
     },
-    //  todo future support
     author: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    // todo future function Comment
     feedbacks: {
       type: Schema.Types.ObjectId,
       ref: "Feedback",

@@ -2,16 +2,15 @@ import express from "express";
 import ticketsRouter from "./tickets.js";
 import usersRouter from "./users.js";
 import feedbacksRouter from "./feedbacks.js";
-import deadLineRouter from "./deadLine.js";
-
-
+import authRouter from "./auth.js";
+import {isAuth} from "../middleware/isAuth.js"
 const router = express.Router();
 
-router.use("/tickets", ticketsRouter, feedbacksRouter);
+router
+  .use("/auth", authRouter)
 
-router.use("/users", usersRouter);
+  .use("/tickets", isAuth, ticketsRouter, feedbacksRouter)
 
-
-router.use("/deadline", deadLineRouter); // todo future function
+  .use("/users", isAuth, usersRouter);
 
 export default router;

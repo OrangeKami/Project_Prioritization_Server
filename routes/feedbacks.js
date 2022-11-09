@@ -1,17 +1,20 @@
 import express from "express";
 const router = express.Router();
+import {checkRole} from "../middleware/userMiddleware.js";
+
+
 
 router
   .route("/:ticketid/feedbacks")
   .get((req, res) => {
     res.json({ message: "all feedbacks" });
   })
-  .post((req, res) => {
+  .post(checkRole,(req, res) => {
     res.json({ message: "all feedbacks" });
   });
 
 router
-  .route("/:ticketid/feedbacks/:feedbackid")
+  .route("/:ticketid/feedbacks/:feedbackid",checkRole)
   .patch((req, res) => {
     res.json({ message: "updater feedbacks" });
   })
