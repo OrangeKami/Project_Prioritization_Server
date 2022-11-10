@@ -45,19 +45,6 @@ export const validate = (method) => {
       ];
     }
 
-    case "updateInfo": {
-      return [
-        check(["firstName", "lastName", "email"])
-          .not()
-          .isEmpty()
-          .withMessage("Fields can't be blank"),
-
-        check("email")
-          .isEmail()
-          .withMessage("invalid email address")
-          .normalizeEmail(),
-      ];
-    }
 
     case "ticketVali": {
       return [

@@ -23,13 +23,13 @@ export const signUp = async (req, res) => {
     const exists = await User.findOne({ email });
     if (exists) {
       throw Error("Email already in use");
+    } else {
+      const newUser = await User.create(req.body);
+
+      const token = createToken(newUser._id);
+
+      res.status(200).json({ newUser, token });
     }
-
-    const newUser = await User.create(req.body);
-
-    const token = createToken(newUser._id);
-
-    res.status(200).json({ newUser, token });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
@@ -41,9 +41,9 @@ export const signIn = async (req, res) => {
     // Finds the validaiton errores in this requests
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-     return  res.status(422).json({ errors: errors.array() });
+      return res.status(422).json({ errors: errors.array() });
     }
-    
+
     const { email, password } = req.body;
 
     const user = await User.findOne({ email });
