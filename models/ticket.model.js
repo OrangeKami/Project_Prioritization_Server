@@ -56,10 +56,6 @@ const ticketSchema = new Schema(
       ref: "User",
       required: true,
     },
-    feedbacks: {
-      type: Schema.Types.ObjectId,
-      ref: "Feedback",
-    },
   },
   { timestamps: true }
 );
