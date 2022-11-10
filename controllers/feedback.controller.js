@@ -14,7 +14,12 @@ export const getAllFeedbacks = async (req, res) => {
     const findFeedback = await Feedback.find({
       ticketId: ticketid,
     })
-      .populate("ticketId")
+      .populate({
+        path: "ticketId",
+        populate: {
+          path: "author",
+        },
+      })
       .populate("feedbackBy");
     res.status(200).json({ findFeedback });
   } catch (err) {
