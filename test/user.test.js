@@ -63,6 +63,7 @@ describe("/api/users/:id testing all user route ", () => {
     expect(res.statusCode).toBe(200);
   });
 
+  //  delete user function
   test("delete user successfully", async () => {
     const response = await request(app).post("/api/auth/signIn").send({
       email: "pasttest@test.com",
@@ -73,7 +74,9 @@ describe("/api/users/:id testing all user route ", () => {
       .delete(`/api/users/${response.body.user._id}`)
       .set("Authorization", `bearer ${response.body.token}`);
 
-    console.log(response.body);
+    // console.log(response.body);
     expect(res.statusCode).toBe(200);
   });
+
+  // ! muanul test delete ticket function
 });

@@ -1,5 +1,6 @@
 import Ticket from "../models/ticket.model.js";
 import mongoose from "mongoose";
+import { validationResult } from "express-validator";
 
 //  ! get all my tickets with submitted and no sumitted
 export const getAllMyTickets = async (req, res) => {
@@ -47,6 +48,12 @@ export const createTicket = async (req, res) => {
   try {
     // * for test only
     // console.log(req.user._id);
+    // Finds the validaiton errores in this requests
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    
     const ticket = req.body;
     ticket.author = req.user._id;
     const newTicket = await Ticket.create(ticket);

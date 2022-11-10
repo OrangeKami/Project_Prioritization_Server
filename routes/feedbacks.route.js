@@ -14,8 +14,8 @@ router
   .post(checkRole, postFeedback); //! check role
 
 router
-  .route("/:ticketid/feedbacks/:feedbackid", checkRole) // ! check role is == "manager"
-  .patch(updateFeedback)
-  .delete(deleteFeedback);
+  .route("/:ticketid/feedbacks/:feedbackid") // ! check role is == "manager"
+  .patch(checkRole, updateFeedback)
+  .delete(checkRole,deleteFeedback);
 
 export default router;
