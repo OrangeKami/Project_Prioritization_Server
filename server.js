@@ -2,13 +2,16 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import bodyParser from "body-parser";
-import mainRouter from "./routes/mainRouter.js";
+import api from "./routes/api.route.js";
+import dotenv from "dotenv";
 
 // * middleware
+
 export const app = express();
 app.use(cors());
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
+dotenv.config();
 
 // ! monitor path at terminal
 app.use((req, res, next) => {
@@ -38,6 +41,4 @@ app.use(
 );
 
 // * register the mainRouter
-app.use(mainRouter);
-
-
+app.use("/api", api);

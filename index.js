@@ -1,12 +1,8 @@
 import { app } from "./server.js";
 import mongoose from "mongoose";
-import dotenv from "dotenv";
-
-dotenv.config()
 
 // * set database config
 const dbConfig = { useNewUrlParser: true, useUnifiedTopology: true };
-
 
 //  * connect to server MongoDB
 mongoose
@@ -20,13 +16,4 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
-
-
-// * not in use when mongodb is ser up
-// app.get("/", (req, res) => {
-//   res.json({ message: "Welcome to Project!" });
-// });
-
-
-
 
