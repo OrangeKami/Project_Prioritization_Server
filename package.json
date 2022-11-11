@@ -12,7 +12,7 @@
     "test:watch": "jest --watch",
     "start": "cross-env NODE_ENV=development nodemon src /index.js",
     "production": "cross-env NODE_ENV=production node src /index.js",
-    "dev": "cross-env PORT=55000 NODE_ENV=development nodemon src /index.js"
+    "dev": "cross-env  NODE_ENV=development nodemon src /index.js"
   },
   "author": "Chen Zhang & Ana Mingyang Wang",
   "license": "ISC",
