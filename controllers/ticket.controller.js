@@ -53,7 +53,7 @@ export const createTicket = async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
-    
+
     const ticket = req.body;
     ticket.author = req.user._id;
     const newTicket = await Ticket.create(ticket);
