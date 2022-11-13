@@ -39,11 +39,22 @@ describe("/auth/signUp will have some situations", () => {
     });
     expect(res.statusCode).toBe(200);
   });
-
+  // * test when password and confirm password are not match 
+   test("return status 422 when password and confirm password are not match", async () => {
+     const res = await request(app).post("/api/auth/signUp").send({
+       lastName: "signup",
+       firstName: "Test",
+       email: "pasttest@test.com",
+       password: "test@123",
+       confirmPassword: "test@1234",
+     });
+     expect(res.statusCode).toBe(422);
+     expect(res.text).toEqual('{"error":"confirm password does not match"}');
+   });
   //  * test  when some filed are not provided
   test("return status 422 when fields are empty", async () => {
     const res = await request(app).post("/api/auth/signUp");
-    expect(res.statusCode).toBe(422);
+    expect(res.statusCode).toBe(422);  
   });
 
   // * test email exist
