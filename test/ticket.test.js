@@ -80,6 +80,14 @@ describe("/tickets create update, get and delete a ticket", () => {
         expect(res.statusCode).toBe(200)
     });
 
+    // check authorization
+     test("get single tickets", async () => {
+       const response = await userLogin();
+       const res = await request(app)
+         .get("/api/tickets/636c6d40363bc2a8277bf356")
+       expect(res.statusCode).toBe(401);
+     });
+
     // * ticket id is not valid
      test("get single tickets with invalid id", async () => {
        const response = await userLogin();

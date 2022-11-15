@@ -49,7 +49,6 @@ describe("/auth/signUp will have some situations", () => {
        confirmPassword: "test@1234",
      });
      expect(res.statusCode).toBe(422);
-     expect(res.text).toEqual('{"error":"confirm password does not match"}');
    });
   //  * test  when some filed are not provided
   test("return status 422 when fields are empty", async () => {
@@ -64,7 +63,7 @@ describe("/auth/signUp will have some situations", () => {
       lastName: "email",
       email: "pasttest@test.com",
       password: "test@123",
-      confirmPassword: "test@123",
+      confirmPassword: "test@123"
     });
     // * for test function purpose
     // console.log(res.statusCode);
