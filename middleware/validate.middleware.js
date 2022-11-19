@@ -48,7 +48,7 @@ export const validate = (method) => {
 
     case "ticketVali": {
       return [
-        check(["initialtive", "description", "target"])
+        check(["initialtive", "description"])
           .not()
           .isEmpty()
           .withMessage("Fields can't be blank"),
