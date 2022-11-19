@@ -12,7 +12,7 @@ import {
 router
   .route("/:id")
   .get(getUser)
-  .patch(updateUser, validate("updateUser"))
+  .patch(validate("updateUser"), updateUser )
   .delete(deleteUser); // todo delete user may for test only
 
 //  * get all users
