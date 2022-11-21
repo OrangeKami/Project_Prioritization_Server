@@ -1,4 +1,5 @@
 import express from "express";
+import { validate } from "../middleware/validate.middleware.js";
 const router = express.Router();
 import {
   updateUser,
@@ -11,7 +12,7 @@ import {
 router
   .route("/:id")
   .get(getUser)
-  .patch(updateUser)
+  .patch(validate("updateUser"), updateUser )
   .delete(deleteUser); // todo delete user may for test only
 
 //  * get all users

@@ -21,25 +21,26 @@ const ticketSchema = new Schema(
 
     target: {
       type: String,
+      default: "Others",
       required: true,
     },
 
     impact: {
       type: String,
-      required: true,
       default: "?",
+      required: true,
       enum: ["Small", "Medium", "Large", "Xlarge", "?"],
     },
     confidence: {
       type: String,
-      required: true,
       default: "?",
+      required: true,
       enum: ["Small", "Medium", "Large", "Xlarge", "?"],
     },
     effort: {
       type: String,
-      required: true,
       default: "?",
+      required: true,
       enum: ["Small", "Medium", "Large", "Xlarge", "?"],
     },
 

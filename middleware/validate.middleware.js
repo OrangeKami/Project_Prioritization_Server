@@ -45,23 +45,37 @@ export const validate = (method) => {
       ];
     }
 
+    case "updateUser": {
+      return [
+        check(["firstName", "lastName"])
+          .not()
+          .isEmpty()
+          .withMessage("Fields can't be blank"),
+        check("email")
+          .isEmail()
+          .withMessage("invalid email address")
+          .normalizeEmail(),
+      ];
+    }
 
     case "ticketVali": {
       return [
-        check(["initialtive", "description", "target"])
+        check(["initialtive", "description"])
           .not()
           .isEmpty()
           .withMessage("Fields can't be blank"),
 
         check("description")
-          .isLength({min:5, max: 200 })
+          .isLength({ min: 5, max: 200 })
           .withMessage("Descrpition length is between 5-200"),
 
         check("initialtive")
-          .isLength({min:5, max: 30 })
+          .isLength({ min: 5, max: 30 })
           .withMessage("Title length is between 5-30"),
 
-        check("target").isLength({min:3, max: 20}).withMessage("Target length is between 3-20")
+        check("target")
+          .isLength({ min: 3, max: 20 })
+          .withMessage("Target length is between 3-20"),
       ];
     }
   }
