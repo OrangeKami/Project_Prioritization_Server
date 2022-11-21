@@ -58,7 +58,9 @@ describe("/api/users/:id testing all user route ", () => {
       .patch(`/api/users/${response.body.user._id}`)
       .set("Authorization", `bearer ${response.body.token}`)
       .send({
-        firstName: "Test123",
+        firstName: "Test",
+        lastName: "User",
+        email: "usertest@test.com",
       });
     expect(res.statusCode).toBe(200);
   });
