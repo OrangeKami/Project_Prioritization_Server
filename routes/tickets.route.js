@@ -22,7 +22,6 @@ router
 
   .delete("/:id", deleteTicket) //  * delete a single ticket
 
-  .put("/:id",  updateTicket); // * update a single ticket
+  .put("/:id", validate("ticketVali"), updateTicket); // * update a single ticket
 
-  
 export default router;
