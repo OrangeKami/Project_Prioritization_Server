@@ -46,8 +46,6 @@ export const getSingleTicket = async (req, res) => {
 // ! create new Ticket
 export const createTicket = async (req, res) => {
   try {
-    // * for test only
-    // console.log(req.user._id);
     // Finds the validaiton errores in this requests
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -64,7 +62,6 @@ export const createTicket = async (req, res) => {
 };
 
 // ! update Ticket
-
 export const updateTicket = async (req, res) => {
   const { id } = req.params;
   // * check params id is valid mongoose objective id

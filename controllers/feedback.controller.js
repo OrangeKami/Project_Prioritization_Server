@@ -37,9 +37,6 @@ export const postFeedback = async (req, res) => {
   }
 
   try {
-    // * for test
-    // console.log(req.user)
-    // console.log(req.params)
     const feedback = req.body;
     // * add ticketId to feedback
     feedback.ticketId = ticketid;

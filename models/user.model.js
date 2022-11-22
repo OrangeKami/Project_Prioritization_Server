@@ -8,7 +8,7 @@ const userSchema = new Schema(
     email: { type: String, required: true, trim: true },
     password: { type: String },
     role: { type: String, enum: ["user", "manager"], default: "user" },
-    // todo future support
+    // todo future support avatar image
     //   avatar: { type: String},
   },
   { timestamps: true }

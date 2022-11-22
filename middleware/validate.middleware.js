@@ -28,7 +28,6 @@ export const validate = (method) => {
 
         check("confirmPassword").custom((value, { req }) => {
           if (value !== req.body.password) {
-            console.log(req.body.password, req.body.confirmPassword);
             throw new Error("confirm password does not match");
           }
           return true;

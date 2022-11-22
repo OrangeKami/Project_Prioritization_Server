@@ -12,7 +12,7 @@ import {
 } from "../controllers/ticket.controller.js";
 
 router
-  .get("/myTickets", getAllMyTickets) // ? need to change to get all submited ticket later
+  .get("/myTickets", getAllMyTickets) // * get all my tickets submitted and unsubmit
 
   .get("/submitted", getSubmittedTickets) // * get submitted tickets
 

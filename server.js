@@ -13,7 +13,7 @@ app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 dotenv.config();
 
-// ! monitor path at terminal
+// ! middleware for monitor path at terminal
 app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();

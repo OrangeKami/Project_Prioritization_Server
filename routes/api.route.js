@@ -13,8 +13,8 @@ router
 
   .use("/users", isAuth, usersRouter)
 
-// * not in use when mongodb is ser up
-// ! test only
+// * when mongodb is ser up
+// * welcome message 
 .get("/", (req, res) => {
   res.status(200).json({ message: "Welcome to Project!" });
 });

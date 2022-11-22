@@ -16,7 +16,6 @@ export const updateUser = async (req, res) => {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).json({ error: "No such User" });
     }
-
     await User.findByIdAndUpdate(id, req.body, { new: true });
     res.json(req.body);
   } catch (err) {

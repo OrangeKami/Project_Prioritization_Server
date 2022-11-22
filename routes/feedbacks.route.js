@@ -11,7 +11,7 @@ import {
 router
   .route("/:ticketid/feedbacks")
   .get(getAllFeedbacks)
-  .post(checkRole, postFeedback); //! check role
+  .post(checkRole, postFeedback); //! check role middleware
 
 router
   .route("/:ticketid/feedbacks/:feedbackid") // ! check role is == "manager"

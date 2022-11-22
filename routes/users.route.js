@@ -16,7 +16,7 @@ router
   .delete(deleteUser); // todo delete user may for test only
 
 //  * get all users
-// ? for test only
+// ? for test and admin only
 router.get("/", getAllUsers);
 
 export default router;
