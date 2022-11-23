@@ -13,7 +13,7 @@ router
   .route("/:id")
   .get(getUser)
   .patch(validate("updateUser"), updateUser )
-  .delete(deleteUser); // todo delete user may for test only
+  .delete(deleteUser); //  delete user may for test only
 
 //  * get all users
 // ? for test and admin only

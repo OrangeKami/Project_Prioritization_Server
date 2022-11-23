@@ -12,13 +12,13 @@ import {
 } from "../controllers/ticket.controller.js";
 
 router
-  .get("/myTickets", getAllMyTickets) // * get all my tickets submitted and unsubmit
+  .get("/myTickets", getAllMyTickets) // * get all my tickets submitted and unsubmitted
 
   .get("/submitted", getSubmittedTickets) // * get submitted tickets
 
   .post("/new", validate("ticketVali"), createTicket) // * create a single ticket
 
-  .get("/:id", getSingleTicket) // * get single tickets from
+  .get("/:id", getSingleTicket) // * get a single ticket 
 
   .delete("/:id", deleteTicket) //  * delete a single ticket
 

@@ -17,7 +17,7 @@ afterAll(() => {
 });
 
 describe("check role and create feedback ", () => {
-  // manager create feedback
+  // managers create feedback
   test("create feedback", async () => {
     const response = await managerLogin();
     const res = await request(app)
@@ -42,7 +42,7 @@ describe("check role and create feedback ", () => {
     expect(res.statusCode).toBe(400);
   });
 
-  // user creat feedback
+  // users creat feedback
   test("user create feedback should be unAuthorized", async () => {
     const response = await userLogin();
     const res = await request(app)
@@ -59,7 +59,7 @@ describe("check role and create feedback ", () => {
   });
 });
 
-// * get feedback of the ticketId
+// * gets feedback of the ticketId
 describe("get feedback of the ticket", () => {
   // * check ticketId is valid
   test("ticket id is unvalid", async () => {
@@ -70,7 +70,7 @@ describe("get feedback of the ticket", () => {
     expect(res.statusCode).toBe(404);
   });
 
-  // * get feedback from the ticket
+  // * gets feedback from the ticket
   test("get feedbacks of the ticket", async () => {
     const response = await managerLogin();
     const res = await request(app)
@@ -81,7 +81,7 @@ describe("get feedback of the ticket", () => {
   });
 });
 
-// update feedback when is manager
+// updates feedback when is manager
 describe("update feedback", () => {
   // * feedback id is invalid
   test("invalid feedback id", async () => {
@@ -113,7 +113,7 @@ describe("update feedback", () => {
    
   });
 
-  // * user denied feedback update
+  // * users denied feedback update
   test("invalid feedback id", async () => {
     const response = await userLogin();
     const res = await request(app)

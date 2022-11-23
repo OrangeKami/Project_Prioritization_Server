@@ -6,7 +6,7 @@ import { validate } from "../middleware/validate.middleware.js";
 router
   .post("/signUp", validate("signUp"), signUp) // * sign up users
   .post("/signIn", validate("signIn"), signIn); // * sign in users
-//   todo future function forgot password
-// todo futuere function resetpassword
+//   to do future function forgot password
+// to do futuere function reset password
 
 export default router;

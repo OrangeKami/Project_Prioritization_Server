@@ -50,13 +50,13 @@ describe("/auth/signUp will have some situations", () => {
      });
      expect(res.statusCode).toBe(422);
    });
-  //  * test  when some filed are not provided
+  //  * test  when some files are not provided
   test("return status 422 when fields are empty", async () => {
     const res = await request(app).post("/api/auth/signUp");
     expect(res.statusCode).toBe(422);  
   });
 
-  // * test email exist
+  // * test email exists
   test("return error when email is exsist", async () => {
     const res = await request(app).post("/api/auth/signUp").send({
       firstName: "exist",
@@ -83,7 +83,7 @@ describe("/auth/signIn will hvae some situations", () => {
     expect(res.body.user._id).toBeDefined();
   });
 
-  // * test email or password are incorrect
+  // * test whether email or password is incorrect or not
   test("return status 400 when email or password are incorrect", async () => {
     const res = await invalidLogin();
     // console.log(res.text)

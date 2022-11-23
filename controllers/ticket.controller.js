@@ -2,7 +2,7 @@ import Ticket from "../models/ticket.model.js";
 import mongoose from "mongoose";
 import { validationResult } from "express-validator";
 
-//  ! get all my tickets with submitted and no sumitted
+//  ! get all my tickets with submitted and not sumitted
 export const getAllMyTickets = async (req, res) => {
   try {
     // * find user id after isAuth middleware
@@ -15,7 +15,7 @@ export const getAllMyTickets = async (req, res) => {
   }
 };
 
-// ! get all submitted tickets
+// ! get all the submitted tickets
 export const getSubmittedTickets = async (req, res) => {
   try {
     const submittedTickets = await Ticket.find({ isSubmitted: true }).populate(
@@ -27,7 +27,7 @@ export const getSubmittedTickets = async (req, res) => {
   }
 };
 
-// ! get single ticket
+// ! get a single ticket
 export const getSingleTicket = async (req, res) => {
   const { id } = req.params;
   // * check params id is valid mongoose objective id
@@ -46,7 +46,7 @@ export const getSingleTicket = async (req, res) => {
 // ! create new Ticket
 export const createTicket = async (req, res) => {
   try {
-    // Finds the validaiton errores in this requests
+    // Finds the validaiton errors in this requests
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });

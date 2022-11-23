@@ -12,13 +12,13 @@ const createToken = (_id) => {
 // * /sigup path,  password hashed in userSchema middleware, role is user as default
 export const signUp = async (req, res) => {
   try {
-    // Finds the validaiton errores in this requests
+    // Finds the validaiton errors in this requests
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });
     }
 
-    // *check is email exist
+    // *check whether email exists or not
     const { email } = req.body;
     const exists = await User.findOne({ email });
     if (exists) {
@@ -35,10 +35,10 @@ export const signUp = async (req, res) => {
   }
 };
 
-// * sign in users. find valid email, check the password then create a new token
+// * sign in users. Find valid email, check the password then create a new token
 export const signIn = async (req, res) => {
   try {
-    // Finds the validaiton errores in this requests
+    // Finds the validaiton errors in this requests
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(422).json({ errors: errors.array() });

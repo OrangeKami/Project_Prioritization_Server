@@ -71,7 +71,7 @@ describe("/tickets create update, get and delete a ticket", () => {
         expect(res.statusCode).toBe(422);
     });
 
-    // * get single tickets
+    // * get a single ticket
     test("get single tickets", async () => {
          const response = await userLogin();
          const res = await request(app)
