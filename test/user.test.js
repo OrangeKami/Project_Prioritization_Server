@@ -80,5 +80,5 @@ describe("/api/users/:id testing all user route ", () => {
     expect(res.statusCode).toBe(200);
   });
 
-  // ! muanul test delete ticket function
+  // ! manual test delete ticket function
 });
